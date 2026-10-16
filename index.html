@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ecologia de Anfíbios de Serrapilheira</title>
+<meta name="description" content="Caderno de campo para coleta de dados ecológicos de anfíbios de serrapilheira, incluindo variáveis de habitat.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f5c5c">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Anf. Serrapilheira">
+<style>
+:root{--bg:#eef1ec;--card:#fafbf8;--ink:#1d2b26;--mut:#5b6b64;--line:#c9d2cb;--acc:#0f5c5c;--accink:#fff;--warn:#a63a3a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a17;--card:#1b2622;--ink:#e6ede9;--mut:#9aaba3;--line:#2f3f39;--acc:#4fb3a9;--accink:#08201d;--warn:#e07b7b}}
+:root[data-theme="dark"]{--bg:#121a17;--card:#1b2622;--ink:#e6ede9;--mut:#9aaba3;--line:#2f3f39;--acc:#4fb3a9;--accink:#08201d;--warn:#e07b7b}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:4px 0 2px}
+.sub{color:var(--mut);margin:0 0 12px}
+form{margin-bottom:16px}
+fieldset.sect{border:1px solid var(--line);border-radius:10px;padding:10px 14px 14px;margin:0 0 16px;background:var(--card)}
+fieldset.sect legend{font-weight:700;padding:0 6px;color:var(--acc);font-size:.95rem}
+.list{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.f{display:flex;flex-direction:column;gap:3px;min-width:0}
+.w{grid-column:1/-1}
+label{font-size:.9rem;color:var(--mut)}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px;width:100%;min-height:44px}
+input[readonly]{border-style:dashed;color:var(--mut);cursor:default}
+input.auto{color:var(--acc);font-weight:700;background:var(--bg)}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+textarea{min-height:70px;resize:vertical}
+button{font:inherit;min-height:44px;border-radius:6px;border:1px solid var(--acc);background:var(--acc);color:var(--accink);padding:0 14px;cursor:pointer;font-weight:700}
+button.s{background:transparent;color:var(--acc)}
+button.d{background:transparent;color:var(--warn);border-color:var(--line)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.row>button{flex:1}
+.gps{font-size:.9rem;color:var(--mut);margin:0 0 10px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.top h2{font-size:1.1rem;margin:0}
+.it{border-top:1px solid var(--line);padding:10px 0;display:flex;gap:10px;justify-content:space-between;align-items:center}
+.it b{display:block}
+.it span{color:var(--mut);font-size:.9rem}
+.it .b{display:flex;gap:6px}
+.it button{min-height:40px;padding:0 10px}
+.empty{color:var(--mut);margin:6px 0}
+textarea.out{width:100%;min-height:120px;margin-top:10px;font:13px monospace}
+.msg{margin:10px 0 0;color:var(--mut);font-size:.9rem}
+.ac{position:relative}.sug{position:absolute;left:0;right:0;top:100%;z-index:5;background:var(--card);border:1px solid var(--line);border-radius:6px;max-height:230px;overflow:auto}.sug button{display:block;width:100%;text-align:left;background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--line);border-radius:0;font-weight:400;font-style:italic;padding:11px 10px}.sug .nw{padding:10px;color:var(--mut);font-size:.9rem}summary{cursor:pointer;font-weight:700}details.list textarea{min-height:120px}.hint{display:block;font-size:.78rem;color:var(--mut);font-style:italic;margin-top:2px}.ref{padding-left:1.4em;text-indent:-1.4em;word-break:break-word}.ref a{color:var(--acc)}
+.subh{grid-column:1/-1;font-weight:700;font-size:.9rem;color:var(--acc);margin:6px 0 -2px}
+input.bad{border-color:var(--warn);outline:1px solid var(--warn)}
+
+/* ---------- Instalação ---------- */
+.install-wrap{margin:0 0 16px}
+.install-wrap button{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;font-size:.98rem}
+.install-wrap svg{width:20px;height:20px;flex-shrink:0}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;animation:fade .18s ease}
+.modal[hidden]{display:none}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.modal-c{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;max-width:400px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.modal-c h3{margin:0 0 10px;font-size:1.15rem}
+.modal-c p{margin:0 0 12px;color:var(--mut);font-size:.92rem}
+.modal-c ol{margin:0 0 16px;padding-left:1.35em}
+.modal-c li{margin-bottom:10px;line-height:1.5}
+.modal-c button{width:100%}
+.ios-ic{display:inline-block;vertical-align:-3px;width:18px;height:18px;margin:0 2px}
+@media (prefers-reduced-motion:reduce){.modal{animation:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Anfíbios de Serrapilheira</h1>
+<p class="sub">Caderno de campo para coleta de dados ecológicos de anfíbios de serrapilheira. Um registro por espécime, com variáveis ambientais e de habitat. Os dados ficam salvos neste aparelho até você exportar.</p>
+
+<div class="install-wrap" id="installWrap" hidden>
+  <button type="button" id="installBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+    <span id="installLabel">Instalar aplicativo</span>
+  </button>
+</div>
+
+<form id="f" autocomplete="off">
+
+<fieldset class="sect">
+<legend>1. Espécime</legend>
+<p class="gps" id="gps">Buscando localização…</p>
+<div class="g">
+  <div class="f"><label for="num">Nº de campo</label><input id="num" required></div>
+  <div class="f"><label for="sexo">Sexo</label><select id="sexo"><option value="">—</option><option>Macho</option><option>Fêmea</option><option>Indeterminado</option><option>Juvenil</option><option>Girino</option></select><small class="hint">Selecione a opção.</small></div>
+  <div class="f w ac"><label for="esp">Espécie</label><input id="esp" required autocomplete="off" autocapitalize="off"><small class="hint">Escolha entre as 6 espécies do estudo.</small><div class="sug" id="sug" hidden></div></div>
+  <div class="f w ac"><label for="uf">Estado</label><input id="uf" autocomplete="off" autocapitalize="off" placeholder="Ex.: Bahia ou BA"><small class="hint">Preenchimento automático. Fica memorizado para o próximo registro.</small><div class="sug" id="sugUf" hidden></div></div>
+  <div class="f w ac"><label for="mun">Município</label><input id="mun" autocomplete="off" autocapitalize="off" placeholder="Ex.: Salvador"><small class="hint">Preenchimento automático. A lista é baixada uma vez por estado. Fica memorizado.</small><div class="sug" id="sugMun" hidden></div></div>
+  <div class="f w"><label for="loc">Local</label><input id="loc"></div>
+  <div class="f"><label for="dat">Data</label><input id="dat" inputmode="numeric" placeholder="AAAA-MM-DD" maxlength="10" autocomplete="off"></div>
+  <div class="f"><label for="hor">Horário</label><input id="hor" inputmode="numeric" placeholder="HH:MM" maxlength="5" autocomplete="off"></div>
+  <div class="f"><label for="lat">Latitude</label><input id="lat" inputmode="decimal"></div>
+  <div class="f"><label for="lon">Longitude</label><input id="lon" inputmode="decimal"></div>
+  <div class="f"><label for="mas">Massa (g)</label><input id="mas" inputmode="decimal"></div>
+  <div class="f"><label for="svl">SVL (mm)</label><input id="svl" inputmode="decimal"></div>
+  <div class="f"><label for="tec">Tipo de tecido</label><select id="tec"><option value="">—</option><option>Fígado</option><option>Músculo</option><option>Cauda</option><option>Pé</option><option>Outro</option></select><small class="hint">Selecione a opção.</small></div>
+  <div class="f w"><label for="col">Coletores</label><input id="col" placeholder="Separe os nomes com ;"></div>
+  <div class="f w"><label for="obs">Observações</label><textarea id="obs"></textarea></div>
+</div>
+</fieldset>
+
+<fieldset class="sect">
+<legend>2. Variáveis de habitat</legend>
+<div class="g">
+  <div class="f"><label for="tar">Temperatura do ar (°C)</label><input id="tar" inputmode="decimal"></div>
+  <div class="f"><label for="tsub">Temperatura do substrato (°C)</label><input id="tsub" inputmode="decimal"></div>
+  <div class="f"><label for="umi">Umidade do ar (%)</label><input id="umi" inputmode="decimal"></div>
+  <div class="f"><label for="lum">Luminosidade (lx)</label><input id="lum" inputmode="decimal"></div>
+
+  <p class="subh">Altura da serrapilheira (cm) — 5 pontos</p>
+  <div class="f"><label for="hcen">Central</label><input id="hcen" inputmode="decimal"></div>
+  <div class="f"><label for="hr1">Radial 1</label><input id="hr1" inputmode="decimal"></div>
+  <div class="f"><label for="hr2">Radial 2</label><input id="hr2" inputmode="decimal"></div>
+  <div class="f"><label for="hr3">Radial 3</label><input id="hr3" inputmode="decimal"></div>
+  <div class="f"><label for="hr4">Radial 4</label><input id="hr4" inputmode="decimal"></div>
+  <div class="f w"><label for="hmed">Altura média da serrapilheira (cm) — cálculo automático</label><input id="hmed" class="auto" readonly></div>
+
+  <p class="subh">Estrutura da vegetação</p>
+  <div class="f"><label for="narv">Nº de árvores/arvoretas</label><input id="narv" inputmode="numeric"></div>
+  <div class="f"><label for="ngrand">Nº de árvores grandes (DAP &gt; 15 cm)</label><input id="ngrand" inputmode="numeric"></div>
+  <div class="f"><label for="nmed">Nº de árvores de médio porte (DAP 5–15 cm)</label><input id="nmed" inputmode="numeric"></div>
+  <div class="f"><label for="npeq">Nº de árvores pequenas (DAP &lt; 5 cm)</label><input id="npeq" inputmode="numeric"></div>
+  <div class="f w"><label for="dossel">Cobertura do dossel (%)</label><input id="dossel" inputmode="decimal"><small class="hint">Estimada por fotografia hemisférica, analisada no ImageJ.</small></div>
+
+  <div class="f w"><label for="prod">Produtividade (lx entre 7:00 e 10:00 h)</label><input id="prod" inputmode="decimal"><small class="hint">Luminosidade medida no intervalo das 7h às 10h.</small></div>
+  <div class="f"><label for="matriz">Matriz dominante</label><select id="matriz"><option value="">—</option><option>Gramínea</option><option>Floresta</option><option>Pinus</option></select></div>
+  <div class="f"><label for="pmat">% da matriz dominante</label><input id="pmat" inputmode="decimal"></div>
+</div>
+</fieldset>
+
+<div class="row">
+<button type="button" class="s" id="relo">Atualizar localização</button>
+<button type="submit" id="sv">Salvar espécime</button>
+</div>
+</form>
+
+<section class="list">
+<div class="top"><h2 id="cnt">Registros</h2><button type="button" id="exp">Exportar CSV</button></div>
+<div id="items"></div>
+<p class="msg" id="msg"></p>
+<textarea class="out" id="out" readonly hidden></textarea>
+</section>
+
+<details class="list"><summary>Referências</summary>
+<p class="msg">A lista de espécies inclui as seis espécies-alvo do estudo: <i>Physalaemus olfersii</i>, <i>Physalaemus cuvieri</i>, <i>Physalaemus maculiventris</i>, <i>Physalaemus bokermanni</i>, <i>Adenomera marmorata</i> e <i>Paratelmatobius cardosoi</i>.</p>
+<p class="msg ref">Drummond, L.O., Santana, D.J., Lima, A.P. &amp; Toledo, L.F. 2026. List of Amphibians of Brazil. <i>Herpetologia Brasileira</i> 15(2), Edição Especial "Lista Brasileira de Anfíbios e Répteis". Sociedade Brasileira de Herpetologia. DOI: <a href="https://doi.org/10.5281/zenodo.18340087" target="_blank" rel="noopener">10.5281/zenodo.18340087</a></p>
+<p class="msg ref">Guedes, T.B., Entiauspe-Neto, O.M. &amp; Costa, H.C. 2023. Lista de répteis do Brasil: atualização de 2022. <i>Herpetologia Brasileira</i> 12(1): 57–161. Sociedade Brasileira de Herpetologia. DOI: <a href="https://doi.org/10.5281/zenodo.7829013" target="_blank" rel="noopener">10.5281/zenodo.7829013</a></p></details>
+
+<details class="list"><summary>Créditos</summary>
+<p class="msg ref">Sturaro, M. J. 2026. <i>Ecologia de Anfíbios de Serrapilheira: caderno de campo digital para a coleta de dados ecológicos</i>. Disponível em: <a href="https://marcelosturaro.github.io/Caderno_Herpetologico" target="_blank" rel="noopener">https://marcelosturaro.github.io/Caderno_Herpetologico</a>. Acesso em: <span id="accdate">—</span>.</p>
+</details>
+</main>
+
+<!-- Modal de instruções iOS -->
+<div class="modal" id="iosModal" hidden role="dialog" aria-modal="true" aria-labelledby="iosTitle">
+  <div class="modal-c">
+    <h3 id="iosTitle">Instalar no iPhone / iPad</h3>
+    <p>O Safari não permite instalação automática. Faça manualmente em 3 passos:</p>
+    <ol>
+      <li>Toque no botão <strong>Compartilhar</strong>
+        <svg class="ios-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13"/><path d="m8 7 4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+        (barra inferior do Safari).</li>
+      <li>Role a lista e toque em <strong>Adicionar à Tela de Início</strong>.</li>
+      <li>Toque em <strong>Adicionar</strong> no canto superior.</li>
+    </ol>
+    <p>Depois disso o ícone aparece na sua tela inicial, com funcionamento offline.</p>
+    <button type="button" id="closeModal">Entendi</button>
+  </div>
+</div>
+
+<script>
+(function(){
+var KEY="caderno-serrapilheira-v1",LKEY="caderno-serrapilheira-ultimo-v1";
+var recs=[],editing=null,acc="",last={};
+var $=function(i){return document.getElementById(i)};
+
+var F=["num","esp","sexo","uf","mun","loc","dat","hor","lat","lon","mas","svl","tec","col","obs",
+       "tar","tsub","umi","lum","hcen","hr1","hr2","hr3","hr4","hmed",
+       "narv","ngrand","nmed","npeq","dossel","prod","matriz","pmat"];
+
+var CH=["Nº de campo","Sexo","Espécie","Estado","Município","Local","Data","Horário",
+        "Latitude","Longitude","Massa (g)","SVL (mm)","Tipo de tecido","Coletores","Observações",
+        "Temp. ar (°C)","Temp. substrato (°C)","Umidade do ar (%)","Luminosidade (lx)",
+        "Serrapilheira central (cm)","Serrapilheira radial 1 (cm)","Serrapilheira radial 2 (cm)",
+        "Serrapilheira radial 3 (cm)","Serrapilheira radial 4 (cm)","Serrapilheira média (cm)",
+        "Nº árvores/arvoretas",
+        "Nº árvores grandes (DAP > 15 cm)",
+        "Nº árvores médio porte (DAP 5–15 cm)",
+        "Nº árvores pequenas (DAP < 5 cm)",
+        "Cobertura do dossel (%)",
+        "Produtividade 7-10h (lx)","Matriz dominante","% matriz dominante"];
+
+/* ---------- Lista restrita de espécies ---------- */
+var SP_LIST=[
+ "Physalaemus olfersii",
+ "Physalaemus cuvieri",
+ "Physalaemus maculiventris",
+ "Physalaemus bokermanni",
+ "Adenomera marmorata",
+ "Paratelmatobius cardosoi"
+];
+
+function load(){try{var r=localStorage.getItem(KEY);recs=r?JSON.parse(r):[]}catch(e){recs=[]}if(!Array.isArray(recs))recs=[]}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(recs))}catch(e){$("msg").textContent="Não foi possível salvar no aparelho. Exporte o CSV logo."}}
+function loadLast(){try{var s=localStorage.getItem(LKEY);last=s?JSON.parse(s):{}}catch(e){last={}}if(!last||typeof last!=="object"||Array.isArray(last))last={}}
+function saveLast(){try{localStorage.setItem(LKEY,JSON.stringify(last))}catch(e){}}
+function p2(n){return String(n).padStart(2,"0")}
+function now(){var d=new Date();$("dat").value=d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate());$("hor").value=p2(d.getHours())+":"+p2(d.getMinutes())}
+function nextNum(){var l=recs.length?String(recs[recs.length-1].num):"";var m=l.match(/^(.*?)(\d+)$/);return m?m[1]+String(+m[2]+1).padStart(m[2].length,"0"):""}
+function gps(){
+ var g=$("gps");
+ if(!navigator.geolocation){g.textContent="Localização indisponível. Digite as coordenadas.";return}
+ g.textContent="Buscando localização…";
+ navigator.geolocation.getCurrentPosition(function(p){
+  $("lat").value=p.coords.latitude.toFixed(6);$("lon").value=p.coords.longitude.toFixed(6);
+  acc=Math.round(p.coords.accuracy);g.textContent="Localização capturada (precisão ~"+acc+" m).";
+ },function(){acc="";g.textContent="Sem acesso à localização. Digite as coordenadas ou permita o acesso ao GPS."},
+ {enableHighAccuracy:true,timeout:15000,maximumAge:0});
+}
+function num(v){v=String(v==null?"":v).trim().replace(",",".");var n=parseFloat(v);return isFinite(n)?n:null}
+function calcMean(){
+ var vs=["hcen","hr1","hr2","hr3","hr4"].map(function(k){return num($(k).value)}).filter(function(v){return v!==null});
+ if(!vs.length){$("hmed").value="";return}
+ var s=0;for(var i=0;i<vs.length;i++)s+=vs[i];
+ $("hmed").value=String(Math.round((s/vs.length)*100)/100);
+}
+function fresh(){
+ F.forEach(function(k){$(k).value=""});
+ $("uf").value=last.uf||"";$("mun").value=last.mun||"";
+ $("loc").value=last.loc||"";$("col").value=last.col||"";
+ $("num").value=nextNum();now();gps();calcMean();
+ esp.classList.remove("bad");
+ editing=null;$("sv").textContent="Salvar espécime";
+}
+function esc(v){v=String(v==null?"":v);return /[",\n\r;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
+function row(r){
+ return [r.num||"",r.sexo||"",r.esp||"",r.uf||"",r.mun||"",r.loc||"",r.dat||"",r.hor||"",
+         r.lat||"",r.lon||"",r.mas||"",r.svl||"",r.tec||"",r.col||"",r.obs||"",
+         r.tar||"",r.tsub||"",r.umi||"",r.lum||"",r.hcen||"",r.hr1||"",r.hr2||"",r.hr3||"",r.hr4||"",r.hmed||"",
+         r.narv||"",r.ngrand||"",r.nmed||"",r.npeq||"",r.dossel||"",
+         r.prod||"",r.matriz||"",r.pmat||""];
+}
+function csv(){
+ var rows=[CH.map(esc).join(",")];
+ recs.forEach(function(r){rows.push(row(r).map(esc).join(","))});
+ return rows.join("\r\n");
+}
+function render(){
+ $("cnt").textContent="Registros ("+recs.length+")";
+ var box=$("items");box.textContent="";
+ if(!recs.length){var e=document.createElement("p");e.className="empty";e.textContent="Nenhum espécime salvo ainda.";box.appendChild(e);return}
+ recs.slice().reverse().forEach(function(r,ri){
+  var i=recs.length-1-ri,d=document.createElement("div");d.className="it";
+  var t=document.createElement("div"),b=document.createElement("b"),s=document.createElement("span");
+  b.textContent=r.num+" · "+(r.esp||"sem espécie");
+  s.textContent=[r.sexo,r.mun,r.uf,r.loc,r.dat,r.hor].filter(Boolean).join(" · ");
+  t.appendChild(b);t.appendChild(s);
+  var bt=document.createElement("div");bt.className="b";
+  var ed=document.createElement("button");ed.type="button";ed.className="s";ed.textContent="Editar";
+  ed.onclick=function(){edit(i)};
+  var de=document.createElement("button");de.type="button";de.className="d";de.textContent="Apagar";
+  de.onclick=function(){if(confirm("Apagar o espécime "+r.num+"?")){recs.splice(i,1);save();render()}};
+  bt.appendChild(ed);bt.appendChild(de);d.appendChild(t);d.appendChild(bt);box.appendChild(d);
+ });
+}
+function edit(i){
+ var r=recs[i];editing=i;
+ F.forEach(function(k){$(k).value=r[k]==null?"":r[k]});
+ acc=r.prec||"";
+ var st=$("tec");
+ if(r.tec){
+  var found=false;
+  for(var j=0;j<st.options.length;j++){if(st.options[j].value===r.tec){found=true;break}}
+  if(!found){var op=document.createElement("option");op.textContent=r.tec;op.value=r.tec;st.appendChild(op)}
+  st.value=r.tec;
+ }
+ if(r.sexo==="M")$("sexo").value="Macho";
+ if(r.sexo==="F")$("sexo").value="Fêmea";
+ calcMean();
+ esp.classList.remove("bad");
+ $("sv").textContent="Atualizar espécime";$("gps").textContent="Editando "+r.num+".";
+ ufSync();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+$("f").addEventListener("submit",function(ev){
+ ev.preventDefault();
+ var r={};F.forEach(function(k){r[k]=$(k).value.trim()});
+ if(!isValidSp(r.esp)){
+  esp.classList.add("bad");
+  $("msg").textContent="Espécie fora da lista do estudo. Escolha uma das 6 espécies sugeridas.";
+  esp.focus();
+  return;
+ }
+ esp.classList.remove("bad");
+ if(editing!==null){recs[editing]=r}else{recs.push(r)}
+ save();render();
+ last={uf:r.uf,mun:r.mun,loc:r.loc,col:r.col};saveLast();
+ fresh();
+ $("msg").textContent="Espécime "+r.num+" salvo.";
+});
+$("relo").onclick=gps;
+$("exp").onclick=function(){
+ var out=$("out");
+ if(!recs.length){$("msg").textContent="Salve ao menos um espécime antes de exportar.";return}
+ var data=csv(),d=new Date(),name="serrapilheira_"+d.getFullYear()+p2(d.getMonth()+1)+p2(d.getDate())+".csv";
+ function fallback(){out.hidden=false;out.value=data;out.select();$("msg").textContent="Não foi possível baixar. Copie o texto abaixo e cole em um arquivo .csv."}
+ try{var bl=new Blob([data],{type:"text/csv;charset=utf-8"}),u=URL.createObjectURL(bl),an=document.createElement("a");
+ an.href=u;an.download=name;document.body.appendChild(an);an.click();an.remove();
+ setTimeout(function(){URL.revokeObjectURL(u)},4000);
+ $("msg").textContent="CSV exportado para a pasta Downloads."}catch(e){fallback()}
+};
+
+/* Média automática da serrapilheira */
+["hcen","hr1","hr2","hr3","hr4"].forEach(function(k){$(k).addEventListener("input",calcMean)});
+
+/* ---------------- Autocomplete de espécies (lista fixa) ---------------- */
+function nz(x){return String(x).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()}
+var spNorm=SP_LIST.map(nz);
+function isValidSp(v){
+ var k=nz(String(v||"").trim());
+ return spNorm.indexOf(k)>-1;
+}
+var esp=$("esp"),sug=$("sug");
+function hideSug(){sug.hidden=true;sug.textContent=""}
+function showSug(){
+ var v=esp.value.trim();
+ var q=nz(v),a=[],b=[],exact=false;
+ for(var i=0;i<SP_LIST.length;i++){
+  var p=spNorm[i].indexOf(q);
+  if(spNorm[i]===q)exact=true;
+  if(!q||p===0)a.push(SP_LIST[i]);
+  else if(p>0)b.push(SP_LIST[i]);
+ }
+ var res=a.concat(b).slice(0,8);sug.textContent="";
+ res.forEach(function(n){
+  var bt=document.createElement("button");bt.type="button";bt.textContent=n;
+  bt.onmousedown=function(e){e.preventDefault()};
+  bt.onclick=function(){esp.value=n;esp.classList.remove("bad");hideSug()};
+  sug.appendChild(bt);
+ });
+ if(!res.length){
+  var d=document.createElement("div");d.className="nw";
+  d.textContent="Espécie não faz parte da lista do estudo.";
+  sug.appendChild(d);
+ }else if(!exact){
+  var d2=document.createElement("div");d2.className="nw";
+  d2.textContent="Só as 6 espécies do estudo são aceitas.";
+  sug.appendChild(d2);
+ }
+ sug.hidden=false;
+}
+esp.addEventListener("input",function(){esp.classList.remove("bad");showSug()});
+esp.addEventListener("focus",showSug);
+esp.addEventListener("blur",function(){setTimeout(hideSug,200)});
+
+var horIn=$("hor");
+horIn.addEventListener("input",function(){
+ var v=horIn.value.replace(/\D/g,"").slice(0,4);
+ if(v.length>=3)v=v.slice(0,2)+":"+v.slice(2);
+ horIn.value=v;
+});
+horIn.addEventListener("blur",function(){
+ var v=horIn.value.replace(/\D/g,"");
+ if(v.length===3)v="0"+v;
+ if(v.length===4){
+  var h=parseInt(v.slice(0,2),10),m=parseInt(v.slice(2),10);
+  if(h<0||h>23||m<0||m>59){horIn.value="";return}
+  horIn.value=(h<10?"0":"")+h+":"+(m<10?"0":"")+m;
+ }else if(v.length===0){horIn.value=""}else{horIn.value=""}
+});
+
+var UFS=[["AC","Acre"],["AL","Alagoas"],["AP","Amapá"],["AM","Amazonas"],["BA","Bahia"],["CE","Ceará"],["DF","Distrito Federal"],["ES","Espírito Santo"],["GO","Goiás"],["MA","Maranhão"],["MT","Mato Grosso"],["MS","Mato Grosso do Sul"],["MG","Minas Gerais"],["PA","Pará"],["PB","Paraíba"],["PR","Paraná"],["PE","Pernambuco"],["PI","Piauí"],["RJ","Rio de Janeiro"],["RN","Rio Grande do Norte"],["RS","Rio Grande do Sul"],["RO","Rondônia"],["RR","Roraima"],["SC","Santa Catarina"],["SP","São Paulo"],["SE","Sergipe"],["TO","Tocantins"]];
+function ufSigla(v){v=String(v||"").trim();if(!v)return"";var k=nz(v);for(var i=0;i<UFS.length;i++){if(nz(UFS[i][0])===k||nz(UFS[i][1])===k)return UFS[i][0]}return""}
+function ufName(v){v=String(v||"").trim();if(!v)return"";var k=nz(v);for(var i=0;i<UFS.length;i++){if(nz(UFS[i][0])===k||nz(UFS[i][1])===k)return UFS[i][1]}return v}
+
+var MUNK="campo-municipios-",munCache={},munBusy={};
+function munFor(s){if(!s)return[];if(munCache[s])return munCache[s];try{var t=localStorage.getItem(MUNK+s);if(t){var a=JSON.parse(t);if(Array.isArray(a)&&a.length){munCache[s]=a;return a}}}catch(e){}return[]}
+function munFetch(s,cb){
+ if(!s||munBusy[s])return;
+ munBusy[s]=1;
+ try{
+  fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados/"+encodeURIComponent(s)+"/municipios?orderBy=nome")
+   .then(function(r){if(!r.ok)throw 0;return r.json()})
+   .then(function(j){
+    var n=(j||[]).map(function(m){return m&&m.nome}).filter(Boolean);
+    if(n.length){munCache[s]=n;try{localStorage.setItem(MUNK+s,JSON.stringify(n))}catch(e){}}
+    munBusy[s]=0;if(cb)cb(n.length>0);
+   })
+   .catch(function(){munBusy[s]=0});
+ }catch(e){munBusy[s]=0}
+}
+
+function mkAC(inp,sugEl,getItems,noteFn){
+ function hide(){sugEl.hidden=true;sugEl.textContent=""}
+ function show(){
+  var v=inp.value.trim();
+  if(!v){hide();return}
+  var q=nz(v),items=getItems()||[],a=[],b=[],exact=false;
+  for(var i=0;i<items.length;i++){
+   var it=items[i],mn=nz(it.v),mx=it.x?nz(it.x):"",p=mn.indexOf(q),px=mx?mx.indexOf(q):-1;
+   if(mn===q||(mx&&mx===q))exact=true;
+   if(p===0||px===0)a.push(it);else if(p>0||px>0)b.push(it);
+  }
+  var res=a.concat(b).slice(0,8);sugEl.textContent="";
+  res.forEach(function(it){
+   var bt=document.createElement("button");bt.type="button";bt.textContent=it.d||it.v;
+   bt.onmousedown=function(e){e.preventDefault()};
+   bt.onclick=function(){inp.value=it.v;hide();inp.dispatchEvent(new Event("change"))};
+   sugEl.appendChild(bt);
+  });
+  if(!exact&&noteFn){
+   var t=res.length?"Continue digitando se a opção não estiver na lista.":noteFn();
+   if(t){var d=document.createElement("div");d.className="nw";d.textContent=t;sugEl.appendChild(d)}
+  }
+  sugEl.hidden=false;
+ }
+ inp.addEventListener("input",show);
+ inp.addEventListener("focus",show);
+ inp.addEventListener("blur",function(){setTimeout(hide,200)});
+ return{show:show,hide:hide};
+}
+
+var ufIn=$("uf"),munIn=$("mun");
+var munAC=mkAC(munIn,$("sugMun"),function(){
+ var s=ufSigla(ufIn.value);if(!s)return[];
+ var L=munFor(s);
+ if(!L.length)munFetch(s,function(ok){if(ok&&document.activeElement===munIn)munAC.show()});
+ return L.map(function(n){return{v:n,d:n}});
+},function(){return ufSigla(ufIn.value)?"Município não encontrado na lista. Você pode digitar livremente.":"Selecione o estado acima para ver a lista de municípios."});
+var ufAC=mkAC(ufIn,$("sugUf"),function(){
+ return UFS.map(function(u){return{v:u[1],x:u[0],d:u[1]+" ("+u[0]+")"}});
+},function(){return"Estado não encontrado. Digite a sigla (ex.: BA) ou o nome completo."});
+
+function ufSync(){
+ var s=ufSigla(ufIn.value);
+ if(s)munFetch(s,function(ok){if(ok&&document.activeElement===munIn)munAC.show()});
+}
+ufIn.addEventListener("change",ufSync);
+ufIn.addEventListener("blur",function(){
+ setTimeout(function(){
+  var n=ufName(ufIn.value);
+  if(n&&n!==ufIn.value&&ufSigla(n)){ufIn.value=n;ufSync()}
+ },300);
+});
+
+function setAccDate(){
+ var el=$("accdate");if(!el)return;
+ var d=new Date();
+ el.textContent=p2(d.getDate())+"/"+p2(d.getMonth()+1)+"/"+d.getFullYear();
+}
+
+/* ============================================================
+   INSTALAÇÃO PWA (Android / iOS / desktop)
+   ============================================================ */
+var deferredPrompt=null,installWrap=$("installWrap"),installBtn=$("installBtn"),iosModal=$("iosModal");
+function isStandalone(){
+ try{
+  if(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)return true;
+  if(window.navigator.standalone===true)return true;
+  if(window.matchMedia&&window.matchMedia("(display-mode: fullscreen)").matches)return true;
+  if(window.matchMedia&&window.matchMedia("(display-mode: minimal-ui)").matches)return true;
+ }catch(e){}
+ return false;
+}
+function isIOS(){
+ var ua=navigator.userAgent||"";
+ if(/iPad|iPhone|iPod/.test(ua))return true;
+ if(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)return true;
+ return false;
+}
+function showInstall(){if(installWrap)installWrap.hidden=false}
+function hideInstall(){if(installWrap)installWrap.hidden=true}
+function refreshInstall(){
+ if(isStandalone()){hideInstall();return}
+ if(deferredPrompt){showInstall();return}
+ if(isIOS()){showInstall();return}
+ hideInstall();
+}
+if(installBtn){
+ installBtn.addEventListener("click",function(){
+  if(deferredPrompt){
+   deferredPrompt.prompt();
+   deferredPrompt.userChoice.then(function(c){
+    if(c&&c.outcome==="accepted")hideInstall();
+    deferredPrompt=null;
+    refreshInstall();
+   }).catch(function(){deferredPrompt=null;refreshInstall()});
+  }else if(isIOS()){
+   if(iosModal)iosModal.hidden=false;
+  }else{
+   var m=$("msg");if(m)m.textContent="Use o menu do navegador (⋮ ou ≡) e escolha “Instalar aplicativo” ou “Adicionar à tela inicial”.";
+  }
+ });
+}
+if(iosModal){
+ var closeBtn=$("closeModal");
+ if(closeBtn)closeBtn.addEventListener("click",function(){iosModal.hidden=true});
+ iosModal.addEventListener("click",function(e){if(e.target===iosModal)iosModal.hidden=true});
+ document.addEventListener("keydown",function(e){if(e.key==="Escape")iosModal.hidden=true});
+}
+window.addEventListener("beforeinstallprompt",function(e){
+ e.preventDefault();
+ deferredPrompt=e;
+ refreshInstall();
+});
+window.addEventListener("appinstalled",function(){
+ deferredPrompt=null;
+ hideInstall();
+ if(iosModal)iosModal.hidden=true;
+ var m=$("msg");if(m)m.textContent="Aplicativo instalado com sucesso!";
+});
+if(window.matchMedia){
+ try{
+  var mq=window.matchMedia("(display-mode: standalone)");
+  var onCh=function(){refreshInstall()};
+  if(mq.addEventListener)mq.addEventListener("change",onCh);
+  else if(mq.addListener)mq.addListener(onCh);
+ }catch(e){}
+}
+
+load();loadLast();render();fresh();setAccDate();refreshInstall();
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
+})();
+</script>
+</body>
+</html>
